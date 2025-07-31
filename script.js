@@ -81,7 +81,7 @@ let middlewareExecuting = false;
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Setting up form middleware');
+    console.log('Setting up form middleware => v2');
     
     // Get the form element
     const unlockForm = document.getElementById('unlockForm');
