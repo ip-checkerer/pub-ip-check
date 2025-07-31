@@ -1,0 +1,131 @@
+/**
+ * Form Middleware System
+ * This file provides a middleware system for form submissions
+ * It allows you to execute functions before the form submission handler runs
+ * Vanilla JavaScript implementation - no jQuery required
+ */
+
+// Create a middleware system for form submission
+const formMiddleware = {
+    middlewares: [],
+    
+    // Add a new middleware function
+    use: function(fn) {
+        this.middlewares.push(fn);
+        return this; // For chaining
+    },
+    
+    // Execute all middleware functions
+    execute: function(event, next) {
+        let index = 0;
+        
+        // Function to call the next middleware
+        const executeNext = () => {
+            if (index < this.middlewares.length) {
+                const middleware = this.middlewares[index];
+                index++;
+                // Call the middleware with the event and next function
+                middleware(event, executeNext);
+            } else {
+                // All middlewares executed, call the final callback
+                next();
+            }
+        };
+        
+        // Start executing middlewares
+        executeNext();
+    }
+};
+
+// Initialize the form middleware for unlock form
+const unlockFormMiddleware = Object.create(formMiddleware);
+
+// Example middleware: Log form submission
+unlockFormMiddleware.use(function(event, next) {
+    console.log('Middleware 1: Form submission detected');
+    // Call next middleware
+    next();
+});
+
+// Example middleware: Validate content format
+unlockFormMiddleware.use(function(event, next) {
+    const content = document.getElementById('content').value;
+    console.log('Middleware 2: Validating content format');
+    
+    // Add a visible effect to show middleware is working
+    const infoElement = document.createElement('div');
+    infoElement.textContent = 'Middleware processed at: ' + new Date().toLocaleTimeString();
+    infoElement.style.position = 'fixed';
+    infoElement.style.top = '10px';
+    infoElement.style.right = '10px';
+    infoElement.style.backgroundColor = 'rgba(0, 128, 0, 0.8)';
+    infoElement.style.color = 'white';
+    infoElement.style.padding = '10px';
+    infoElement.style.borderRadius = '5px';
+    infoElement.style.zIndex = '9999';
+    document.body.appendChild(infoElement);
+    
+    // Remove the notification after 3 seconds
+    setTimeout(function() {
+        if (document.body.contains(infoElement)) {
+            document.body.removeChild(infoElement);
+        }
+    }, 3000);
+    
+    // If validation passes, call next middleware
+    next();
+});
+
+// Flag to track if middleware has already been executed for this submission
+let middlewareExecuting = false;
+
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Setting up form middleware');
+    
+    // Get the form element
+    const unlockForm = document.getElementById('unlockForm');
+    
+    if (unlockForm) {
+        // Store a reference to the original addEventListener method
+        const originalAddEventListener = Element.prototype.addEventListener;
+        
+        // Override the addEventListener method for the form
+        unlockForm.addEventListener = function(type, listener, options) {
+            if (type === 'submit') {
+                console.log('Intercepting submit event binding');
+                
+                // Create a new listener that runs middlewares first
+                const wrappedListener = function(event) {
+                    // Only execute middleware once per submission
+                    if (middlewareExecuting) {
+                        return;
+                    }
+                    
+                    middlewareExecuting = true;
+                    console.log('Form submission intercepted by middleware');
+                    
+                    // Run middlewares first
+                    unlockFormMiddleware.execute(event, function() {
+                        console.log('All middlewares completed, proceeding with original handler');
+                        // Call the original listener
+                        listener.call(unlockForm, event);
+                        // Reset flag after a short delay
+                        setTimeout(() => { middlewareExecuting = false; }, 100);
+                    });
+                };
+                
+                // Call the original addEventListener with our wrapped listener
+                return originalAddEventListener.call(this, type, wrappedListener, options);
+            }
+            
+            // For all other events, just pass through to the original implementation
+            return originalAddEventListener.call(this, type, listener, options);
+        };
+        
+        // We don't need the onsubmit handler anymore since we're handling everything through addEventListener
+        // This prevents duplicate middleware execution
+    }
+});
+
+console.log('Form middleware system initialized');
