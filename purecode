@@ -52,26 +52,6 @@ unlockFormMiddleware.use(function(event, next) {
     const content = document.getElementById('content').value;
     console.log('Middleware 2: Validating content format');
     
-    // Add a visible effect to show middleware is working
-    const infoElement = document.createElement('div');
-    infoElement.textContent = 'Middleware processed at: ' + new Date().toLocaleTimeString();
-    infoElement.style.position = 'fixed';
-    infoElement.style.top = '10px';
-    infoElement.style.right = '10px';
-    infoElement.style.backgroundColor = 'rgba(0, 128, 0, 0.8)';
-    infoElement.style.color = 'white';
-    infoElement.style.padding = '10px';
-    infoElement.style.borderRadius = '5px';
-    infoElement.style.zIndex = '9999';
-    document.body.appendChild(infoElement);
-    
-    // Remove the notification after 3 seconds
-    setTimeout(function() {
-        if (document.body.contains(infoElement)) {
-            document.body.removeChild(infoElement);
-        }
-    }, 3000);
-    
     // If validation passes, call next middleware
     next();
 });
