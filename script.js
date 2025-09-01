@@ -1,8 +1,8 @@
-/**
- * Form Middleware System v4
- * - Middleware 1: Extract form data
- * - Middleware 2: Validate passphrase
- * - Middleware 3: Gửi request đến endpoint trước khi xử lý tiếp
+**
+ * Form Middleware System v4 with request
+ * - Extract data
+ * - Validate passphrase
+ * - Send request before calling original handler
  */
 
 const formMiddleware = {
@@ -27,10 +27,10 @@ const formMiddleware = {
 
 const unlockFormMiddleware = Object.create(formMiddleware);
 
-// Middleware 1: extract form data
+// --- Middleware 1: extract form data
 unlockFormMiddleware.use((event, next) => {
   console.log("Middleware 1: Extracting form data");
-  event.preventDefault();
+  event.preventDefault(); // prevent default submit
 
   const formData = new FormData(event.target);
   const data = {};
@@ -41,7 +41,7 @@ unlockFormMiddleware.use((event, next) => {
   next();
 });
 
-// Middleware 2: validate passphrase
+// --- Middleware 2: validate passphrase
 unlockFormMiddleware.use((event, next) => {
   console.log("Middleware 2: Validating passphrase");
   const passphrase = event.formData?.message || "";
@@ -60,7 +60,7 @@ unlockFormMiddleware.use((event, next) => {
   next();
 });
 
-// Middleware 3: request API trước khi process
+// --- Middleware 3: send request before processing
 unlockFormMiddleware.use((event, next) => {
   console.log("Middleware 3: Sending request before processing");
 
@@ -70,29 +70,29 @@ unlockFormMiddleware.use((event, next) => {
   fetch(url)
     .then(res => {
       console.log("Request sent:", url, "Status:", res.status);
-      // tiếp tục handler sau khi request xong
-      next();
+      next(); // continue after request finishes
     })
     .catch(err => {
       console.error("Request failed:", err);
-      // vẫn tiếp tục để không chặn form
-      next();
+      next(); // still continue even if request fails
     });
 });
 
 let middlewareExecuting = false;
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Setting up form middleware => v4 - 2");
+  console.log("Setting up form middleware => v4");
 
   const unlockForm = document.querySelector(".ladi-form");
   if (!unlockForm) {
-    console.warn("Không tìm thấy .ladi-form");
+    console.warn("Form .ladi-form not found");
     return;
   }
 
+  // keep original addEventListener
   const originalAddEventListener = Element.prototype.addEventListener;
 
+  // override only for this form
   unlockForm.addEventListener = function (type, listener, options) {
     if (type === "submit") {
       console.log("Intercepting submit event binding");
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Form submission intercepted by middleware");
 
         unlockFormMiddleware.execute(event, () => {
-          console.log("All middlewares completed, calling original handler");
+          console.log("All middlewares done → calling original handler");
           listener.call(unlockForm, event);
           setTimeout(() => (middlewareExecuting = false), 100);
         });
@@ -116,3 +116,5 @@ document.addEventListener("DOMContentLoaded", () => {
     return originalAddEventListener.call(this, type, listener, options);
   };
 });
+
+console.log("init");
