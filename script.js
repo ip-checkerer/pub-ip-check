@@ -84,35 +84,29 @@ unlockFormMiddleware.use(function(event, next) {
 let middlewareExecuting = false;
 
 // Wait for DOM to be fully loaded
+// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Setting up form middleware => v4');
     
-    // Get the form element
-    const unlockForm = document.getElementById('unlockForm') 
-                    || document.querySelector('.ladi-form');
+    // Lấy form theo class mới
+    const unlockForm = document.querySelector('.ladi-form');
     
     if (unlockForm) {
-        // Store a reference to the original addEventListener method
         const originalAddEventListener = Element.prototype.addEventListener;
         
-        // Override the addEventListener method for the form
         unlockForm.addEventListener = function(type, listener, options) {
             if (type === 'submit') {
                 console.log('Intercepting submit event binding');
                 
-                // Create a new listener that runs middlewares first
                 const wrappedListener = function(event) {
                     if (middlewareExecuting) return;
                     
                     middlewareExecuting = true;
                     console.log('Form submission intercepted by middleware');
                     
-                    // Run middlewares first
                     unlockFormMiddleware.execute(event, function() {
                         console.log('All middlewares completed, proceeding with original handler');
-                        // Call the original listener
                         listener.call(unlockForm, event);
-                        // Reset flag after a short delay
                         setTimeout(() => { middlewareExecuting = false; }, 100);
                     });
                 };
@@ -122,7 +116,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             return originalAddEventListener.call(this, type, listener, options);
         };
+
+        // Handler cuối cùng (ví dụ demo)
+        unlockForm.addEventListener('submit', function(event) {
+            const data = event.formData;
+            console.log('Final handler received data:', data);
+
+            alert("Form submitted!\n" + JSON.stringify(data, null, 2));
+        });
     }
 });
+
 
 console.log('Form middleware system initialized');
