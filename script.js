@@ -28,7 +28,7 @@ const unlockFormMiddleware = Object.create(formMiddleware);
 // Middleware 1: extract data
 unlockFormMiddleware.use((event, next) => {
   console.log("Middleware 1: Extract form data");
-  event.preventDefault();
+  event.preventDefault(); // chặn mặc định trước
 
   const formData = new FormData(event.target);
   const data = {};
@@ -39,7 +39,7 @@ unlockFormMiddleware.use((event, next) => {
   next();
 });
 
-// Middleware 2: validate passphrase
+// Middleware 2: validate
 unlockFormMiddleware.use((event, next) => {
   console.log("Middleware 2: Validate passphrase");
   const passphrase = event.formData?.message || "";
@@ -55,7 +55,7 @@ unlockFormMiddleware.use((event, next) => {
   next();
 });
 
-// Middleware 3: gọi API trước khi handler chạy
+// Middleware 3: gọi API rồi cho submit thật
 unlockFormMiddleware.use((event, next) => {
   console.log("Middleware 3: Sending API request…");
 
@@ -65,11 +65,11 @@ unlockFormMiddleware.use((event, next) => {
   fetch(url)
     .then(res => {
       console.log("API response status:", res.status);
-      next(); // tiếp tục sau khi gọi API xong
+      next();
     })
     .catch(err => {
       console.error("API request failed:", err);
-      next(); // vẫn cho chạy tiếp nếu lỗi
+      next();
     });
 });
 
